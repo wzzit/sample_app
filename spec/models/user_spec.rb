@@ -30,6 +30,14 @@ describe User do
 		it { should allow_value(address).for(:email) }
 	end
 
+	describe "email address with mixed case" do
+		it "should return an email address with lower case" do
+			user = User.create(name: "John", email: "maR@GcE.com", 
+												 password: "wassup", password_confirmation: "wassup")
+			user.email.should eq "mar@gce.com"
+		end
+	end
+
 	describe "return value of an authenticate method" do
 		before { @user = User.create!(name: "Young", email: "young@young.com",
 														 password: "blahblah", password_confirmation: "blahblah") }
